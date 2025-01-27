@@ -19,51 +19,71 @@ const IndexPage = ({ externalUrl }: Props) => {
 
         // 스타일 추가
         const style = doc.createElement("style");
-        style.textContent = `
-          /* 팝업 스타일 */
-          .container {
-            position: fixed; /* 화면 고정 */
-            top: 50%; /* 세로축 가운데 */
-            left: 50%; /* 가로축 가운데 */
-            transform: translate(-50%, 0); /* 가로축 중앙 + 세로축 자유 조정 */
-            z-index: 9999; /* 최상위 표시 */
-            width: 90%; /* 모바일에서 너비 설정 */
-            max-width: 400px; /* PC에서 최대 너비 */
-            background-color: #fff; /* 팝업 배경 */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 그림자 */
-            border-radius: 8px; /* 둥근 모서리 */
-            padding: 20px; /* 내부 여백 */
-          }
-          /* 닫기 버튼 */
-          .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-          }
-          .inner {
-            text-align: center;
-          }
-          /* 배너 */
-          .popup-banner {
+        style.textContent = `        
+          .LTZea {
+            position: fixed;
             width: 100%;
-            height: 150px;
-            background-size: cover;
-            background-position: center;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+            opacity: 1;
+            visibility: visible;
+            transition: 0.2s;
+            z-index: 999;
           }
-          /* 버튼 */
-          .btn-box {
-            margin-top: 20px;
-          }
-          .more-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #ff5722;
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: center;
-          }
+          .LTZea .overlay {
+    opacity: 1;
+    visibility: visible;
+    z-index: 50;
+}
+.LTZea .overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+    transition: 0.2s;
+}
+LTZea .container {
+    transform: translate(-50%, 0%);
+}
+@media (max-width: 500px) {
+    .LTZea .container {
+        max-width: 100vw;
+    }
+}
+.LTZea .container {
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    transform: translate(-50%, 100%);
+    max-width: 360px;
+    width: 100%;
+    height: 436px;
+    z-index: 100;
+    border-radius: 20px 20px 0px 0px;
+    background-color: rgb(255, 255, 255);
+    transition: 0.2s;
+    padding: 0px;
+}
+    .LTZea .close-btn {
+    position: absolute;
+    top: -14px;
+    right: 0px;
+    transform: translateY(-100%);
+    cursor: pointer;
+    padding: 6px;
+}
+    .gARQYv {
+    padding: 24px 20px 75px;
+    border-radius: 20px 20px 0px 0px;
+    background: rgb(255, 255, 255);
+    backdrop-filter: blur(7px);
+}    
         `;
 
         // 스타일을 <head>에 삽입
