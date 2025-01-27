@@ -11,7 +11,7 @@ const IndexPage = ({ externalUrl }: Props) => {
     <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <div style={{  position: 'relative',  height: 0,  paddingBottom: '100%', overflow: 'hidden' }}>
+      <div style={{  position: 'relative',  height: 0,  paddingBottom: '900px', overflow: 'hidden' }}>
       <iframe
         src={externalUrl}
         width="100%"
