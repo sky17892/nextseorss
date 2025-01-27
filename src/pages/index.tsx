@@ -1,6 +1,6 @@
-import { GetServerSideProps } from "next";
-import Head from "next/head";
-import { useEffect, useRef } from "react";
+import { GetServerSideProps } from 'next';
+import Head from 'next/head';
+import { useEffect, useRef } from 'react';
 
 interface Props {
   externalUrl: string;
@@ -12,77 +12,99 @@ const IndexPage = ({ externalUrl }: Props) => {
   useEffect(() => {
     const iframe = iframeRef.current;
 
-    // iframe이 로드되면 실행
+    // iframe이 로드되었을 때 실행
     const onIframeLoad = () => {
-      if (iframe && iframe.contentDocument) {
+      if (iframe?.contentDocument) {
         const doc = iframe.contentDocument;
 
-        // 스타일 추가
-        const style = doc.createElement("style");
-        style.textContent = `
-          /* 팝업 스타일 */
-          .container {
-  position: fixed; /* 화면 고정 */
-  top: 0; /* 화면의 가장 위에 고정 */
-  left: 50%; /* 가로축 화면 가운데 정렬 */
-  transform: translate(-50%, 0); /* 가로축 중앙 정렬 */
-  z-index: 9999; /* 최상위 레이어 */
-  width: 90%; /* 모바일 화면에서의 기본 너비 */
-  max-width: 400px; /* PC 화면에서의 최대 너비 */
-  background-color: #fff; /* 팝업 배경색 */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-  border-radius: 8px; /* 둥근 모서리 */
-  padding: 20px; /* 내부 여백 */
-}
-
-/* 닫기 버튼 */
-.close-btn {
-  position: absolute;
-  top: 10px; /* 팝업 내부의 상단 기준 위치 */
-  right: 10px; /* 팝업 내부의 오른쪽 기준 위치 */
-  cursor: pointer; /* 마우스 포인터 커서 설정 */
-}
-
-/* 내부 텍스트 */
-.inner {
-  text-align: center; /* 중앙 정렬 */
-}
-
-/* 배너 */
-.popup-banner {
-  width: 100%; /* 배너 너비 */
-  height: 150px; /* 배너 높이 */
-  background-size: cover; /* 이미지 크기 조정 */
-  background-position: center; /* 배너 중앙 정렬 */
-}
-
-/* 버튼 박스 */
-.btn-box {
-  margin-top: 20px; /* 위와의 간격 */
-}
-
-/* 자세히 보기 버튼 */
-.more-btn {
-  display: inline-block; /* 인라인 블록 */
-  padding: 10px 20px; /* 버튼 여백 */
-  background-color: #ff5722; /* 버튼 배경색 */
-  color: #fff; /* 텍스트 색상 */
-  border-radius: 4px; /* 둥근 모서리 */
-  cursor: pointer; /* 마우스 포인터 설정 */
-  text-align: center; /* 텍스트 중앙 정렬 */
-}
+        // 팝업 HTML 구조 삽입
+        const popupHTML = `
+          <div class="styled__Wrapper-sc-18mg7us-0 LTZea">
+            <div class="overlay"></div>
+            <div class="container">
+              <div class="close-btn">
+                <img src="/images/bs-close-btn.svg">
+              </div>
+              <div class="inner">
+                <div class="styled__Wrapper-sc-1m0wcoy-0 gARQYv">
+                  <div class="modal-wrapper">
+                    <p class="popup-title">첫구매 할인 이벤트</p>
+                    <div class="main-title-box">
+                      <h1 class="main-title">전 상품 첫 구매시<br>무조건 15% 즉시 할인 !</h1>
+                    </div>
+                    <div class="date">
+                      <p>2025.01.08 ~ 02.07</p>
+                    </div>
+                    <div class="popup-banner" style="background-image:url(/images/15_coupon.png)"></div>
+                    <div class="btn-box">
+                      <div class="more-btn">자세히 보기</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         `;
 
-        // 스타일을 <head>에 삽입
-        doc.head.appendChild(style);
+        // 팝업 스타일 삽입
+        const popupStyle = `
+          <style>
+            .container {
+              position: fixed;
+              top: 50%; /* 화면 중간 */
+              left: 50%; /* 화면 가로 중앙 */
+              transform: translate(-50%, -50%); /* 가로 세로 완전 중앙 정렬 */
+              z-index: 9999;
+              width: 90%;
+              max-width: 400px;
+              background-color: #fff;
+              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+              border-radius: 8px;
+              padding: 20px;
+            }
+            .close-btn {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              cursor: pointer;
+            }
+            .inner {
+              text-align: center;
+            }
+            .popup-banner {
+              width: 100%;
+              height: 150px;
+              background-size: cover;
+              background-position: center;
+            }
+            .btn-box {
+              margin-top: 20px;
+            }
+            .more-btn {
+              display: inline-block;
+              padding: 10px 20px;
+              background-color: #ff5722;
+              color: #fff;
+              border-radius: 4px;
+              cursor: pointer;
+              text-align: center;
+            }
+          </style>
+        `;
+
+        // <head>에 스타일 삽입
+        doc.head.insertAdjacentHTML('beforeend', popupStyle);
+
+        // <body>에 팝업 HTML 삽입
+        doc.body.insertAdjacentHTML('afterbegin', popupHTML);
       }
     };
 
-    // iframe이 로드되었을 때 처리
-    iframe?.addEventListener("load", onIframeLoad);
+    // iframe 로드 이벤트
+    iframe?.addEventListener('load', onIframeLoad);
 
     return () => {
-      iframe?.removeEventListener("load", onIframeLoad);
+      iframe?.removeEventListener('load', onIframeLoad);
     };
   }, []);
 
@@ -93,10 +115,10 @@ const IndexPage = ({ externalUrl }: Props) => {
       </Head>
       <div
         style={{
-          position: "relative",
+          position: 'relative',
           height: 0,
-          paddingBottom: "5500px",
-          overflow: "hidden",
+          paddingBottom: '5500px',
+          overflow: 'hidden',
         }}
       >
         <iframe
@@ -104,7 +126,7 @@ const IndexPage = ({ externalUrl }: Props) => {
           src={externalUrl}
           width="100%"
           height="5500px"
-          style={{ position: "absolute", top: 0, left: 0, border: "none" }}
+          style={{ position: 'absolute', top: 0, left: 0, border: 'none' }}
           title="nextjsloadingsite"
         />
       </div>
@@ -112,9 +134,9 @@ const IndexPage = ({ externalUrl }: Props) => {
   );
 };
 
-// 서버 측에서 외부 URL을 전달하는 코드
+// 서버 측에서 외부 URL 전달
 export const getServerSideProps: GetServerSideProps = async () => {
-  const externalUrl = "https://molln.in/";
+  const externalUrl = 'https://molln.in/';
 
   return {
     props: {
