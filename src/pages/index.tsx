@@ -11,11 +11,11 @@ const IndexPage = ({ externalUrl }: Props) => {
     <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <div style={{  position: 'relative',  height: 0,  paddingBottom: '900px', overflow: 'hidden' }}>
+      <div style={{  position: 'relative',  height: 0,  paddingBottom: '880px', overflow: 'hidden' }}>
       <iframe
         src={externalUrl}
         width="100%"
-        height="900px"
+        height="880px"
         style={{ position: 'absolute', top: 0, left: 0, border: 'none' }}
         title="nextjsloadingsite"
       />
