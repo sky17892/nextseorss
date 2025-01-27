@@ -11,12 +11,12 @@ const IndexPage = ({ externalUrl }: Props) => {
     <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-    <div style={{ overflow: 'hidden' }}>    
+      <div style={{ position: 'relative', paddingBottom: '100%', height: 0, overflow: 'hidden' }}>
       <iframe
         src={externalUrl}
         width="100%"
         height="5500px"
-        style={{ border: 'none' }}
+        style={{ position: 'absolute', top: 0, left: 0, border: 'none' }}
         title="External Site"
       />
     </div>
