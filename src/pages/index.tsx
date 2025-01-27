@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 
 interface Props {
   externalUrl: string;
@@ -6,15 +7,20 @@ interface Props {
 
 const IndexPage = ({ externalUrl }: Props) => {
   return (
-    <div>     
+    <>
+    <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+    <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>    
       <iframe
         src={externalUrl}
         width="100%"
         height="5500px"
-        style={{ border: 'none' }}
+        style={{ position: 'absolute', top: 0, left: 0, border: 'none' }}
         title="External Site"
       />
     </div>
+    </>
   );
 };
 
