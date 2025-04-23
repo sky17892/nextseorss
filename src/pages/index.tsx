@@ -2,10 +2,10 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
 interface Props {
-  externalUrl1234: string;
+  eURL123: string;
 }
 
-const IndexPage = ({ externalUrl1234 }: Props) => {
+const IndexPage = ({ eURL123 }: Props) => {
   return (
     <>
     <Head>
@@ -13,7 +13,7 @@ const IndexPage = ({ externalUrl1234 }: Props) => {
       </Head>
       <div style={{  position: 'relative',  height: 0,  paddingBottom: '865px', overflow: 'hidden' }}>
       <iframe
-        src={externalUrl1234}
+        src={eURL123}
         width="100%"
         height="865px"
         style={{ position: 'absolute', top: 0, left: 0, border: 'none' }}
@@ -26,11 +26,11 @@ const IndexPage = ({ externalUrl1234 }: Props) => {
 
 // 서버 측에서 외부 URL을 전달하는 코드
 export const getServerSideProps: GetServerSideProps = async () => {
-  const externalUrl1234 = "https://molln.in/";
+  const eURL123 = "https://molln.in/";
 
   return {
     props: {
-      externalUrl1234, // props로 외부 URL 전달
+      eURL123, // props로 외부 URL 전달
     },
   };
 };
