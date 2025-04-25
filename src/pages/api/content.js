@@ -7,7 +7,7 @@ export async function getServerSideProps() {
     const res = await fetch('https://n12345678.vercel.app/api/content');
     const posts = await res.json();
 
-    // 페이지의 props로 워드프레스 게시물 전달
+    //// 페이지의 props로 워드프레스 게시물 전달
     return {
         props: {
             posts,
