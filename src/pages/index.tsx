@@ -24,7 +24,7 @@ const IndexPage = ({ eURL123 }: Props) => {
   );
 };
 
-// 서버 측에서 외부 URL을 전달하는 코드
+//// 서버 측에서 외부 URL을 전달하는 코드
 export const getServerSideProps: GetServerSideProps = async () => {
   const eURL123 = "https://molln.in/";
 
