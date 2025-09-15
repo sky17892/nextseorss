@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      eURL123, // props로 외부 URL 전달
+      eURL123, //// props로 외부 URL 전달
     },
   };
 };
