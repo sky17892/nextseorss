@@ -26,11 +26,11 @@ const IndexPage = ({ eURL123 }: Props) => {
 
 // 서버 측에서 외부 URL을 전달하는 코드
 export const getServerSideProps: GetServerSideProps = async () => {
-  const eURL123 = "https://molln.in/";
+  const eURL123 = "https://t-nanda.com/";
 
   return {
     props: {
-      eURL123, //// props로 외부 URL 전달
+      eURL123, // props로 외부 URL 전달
     },
   };
 };
